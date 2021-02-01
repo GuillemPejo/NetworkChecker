@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -50,18 +51,23 @@ public class MainActivity extends AppCompatActivity implements ConnectionReceive
 
     private void showSnack(boolean isConnected) {
         int color;
+        int icon;
         String msg;
         if (isConnected){
-            msg = "Connectes to internet";
+            msg = "Connected to internet";
             color = Color.WHITE;
+            icon = R.drawable.conected;
         }else {
-            msg = "Not connected to internet";
+            msg = "Disconnected to internet";
             color = Color.RED;
+            icon = R.drawable.disconected;
         }
 
-        Snackbar snackbar = Snackbar.make(findViewById(R.id.),msg, Snackbar.LENGTH_LONG);
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.btChecker),msg, Snackbar.LENGTH_LONG);
         View v = snackbar.getView();
         TextView sntv = v.findViewById(R.id.snackbar_text);
+        sntv.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
+        sntv.setCompoundDrawablePadding(40);
         sntv.setTextColor(color);
         snackbar.show();
     }
